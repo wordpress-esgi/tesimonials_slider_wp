@@ -1,1 +1,1 @@
-# tesimonials_slider_wp
+# testimonials_slider_wp
