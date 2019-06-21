@@ -3,7 +3,7 @@ class PluginInit
 {
     public function __construct()
     {
-      add_shortcode('testimonial_plugin', 'create_slider');
+      add_shortcode('testimonial_plugin', 'testimonial_init');
       function testimonial_init(){
         return create_slider($atts, $content);
       }
@@ -13,8 +13,16 @@ class PluginInit
       $atts = shortcode_atts(array('numberposts' => 5), $atts);
       $html = array();
       $html[] = $content;
-      $html[] ='<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">';
-      $html[] .='<p>Test slider</p>';
+      $html[] ='<div class="container">';
+      $html[] .=' <div class="row">';
+      $html[] .='   <div class="col-md-12">';
+      $html[] .='     <div class="carousel slide" data-ride="carousel" id="quote-carousel">';
+      $html[] .='       <div class="carousel-inner text-center">';
+      $html[] .='         <p>Test</p>';
+      $html[] .='       </div>';
+      $html[] .='     </div>';
+      $html[] .='   </div>';
+      $html[] .=' </div>';
       $html[] .='</div>';
 
 
