@@ -2,9 +2,9 @@
 
 
 //hook 'admin_menu'
-add_action('admin_menu', 'myplugin_add_admin_link');
+add_action('admin_menu', 'testimonial_add_admin_link');
 
-function myplugin_add_admin_link(){
+function testimonial_add_admin_link(){
   add_menu_page(
     'Testimonial Slider',
     'Temoignages',
