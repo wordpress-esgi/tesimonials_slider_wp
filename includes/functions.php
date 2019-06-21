@@ -15,6 +15,7 @@ function testimonial_add_admin_link(){
 
 function fetchTestimonial()
 {
+    global $wpdb;
   $testimonial_table_name = $wpdb->prefix . 'testimonial';
   $testimonials = $wpdb->get_results( "SELECT * FROM $testimonial_table_name");
   return $testimonials;
