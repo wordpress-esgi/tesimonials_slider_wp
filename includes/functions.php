@@ -1,7 +1,7 @@
 <?php
 
-add_action( 'wp_enqueue_scripts', 'myStyle' );
-function myStyle() {
+add_action( 'wp_enqueue_scripts', 'Bootstrap_style' );
+function Bootstrap_style() {
     wp_enqueue_style( 'myStyle', get_stylesheet_uri());
     wp_enqueue_style('Bootstrap', "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
     wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), null, true);
