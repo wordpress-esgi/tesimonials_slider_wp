@@ -9,3 +9,5 @@ Version: 0.1
 */
 
 require_once plugin_dir_path(__FILE__).'includes/functions.php';
+register_activation_hook(__FILE__, 'install');
+register_deactivation_hook( __FILE__, 'remove_database' );
