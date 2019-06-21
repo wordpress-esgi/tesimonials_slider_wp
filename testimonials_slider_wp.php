@@ -12,13 +12,13 @@ require_once plugin_dir_path(__FILE__).'includes/functions.php';
 register_activation_hook(__FILE__, 'install');
 register_deactivation_hook( __FILE__, 'remove_database' );
 
-class Testimonial_Plugin
+class TestimonialPlugin
 {
   public function __construct()
   {
-    include_once plugin_dir_path( __FILE__ ).'/front_plugin.php';
-    new Plugin_Init();
+    include_once plugin_dir_path( __FILE__ ).'/PluginInit.php';
+    new PluginInit();
   }
 }
 
-new Testimonial_Plugin;
+new TestimonialPlugin;
