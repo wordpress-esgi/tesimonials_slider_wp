@@ -30,7 +30,7 @@ function install(){
                         id MEDIUMINT NOT NULL AUTO_INCREMENT,
                         user_name varchar(45) NOT NULL,
                         message TINYTEXT NOT NULL,
-                        status int NOT NULL DEFAULT 0,
+                        status ENUM('PENDING', 'APPROVED', 'REJECTED') NOT NULL DEFAULT 'PENDING',
                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                         PRIMARY KEY  (id)
