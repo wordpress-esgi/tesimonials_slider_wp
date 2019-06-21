@@ -18,7 +18,18 @@ class PluginInit
       $html[] .='   <div class="col-md-12">';
       $html[] .='     <div class="carousel slide" data-ride="carousel" id="quote-carousel">';
       $html[] .='       <div class="carousel-inner text-center">';
-      $html[] .='         <p>Test</p>';
+      //foreach post
+      $html[] .='         <div class="item active">';
+      $html[] .='           <blockquote>';
+      $html[] .='             <p>Test</p>';
+      $html[] .='           </blockquote>';
+      $html[] .='         </div>';
+      $html[] .='         <div class="item active">';
+      $html[] .='           <blockquote>';
+      $html[] .='             <p>Test</p>';
+      $html[] .='           </blockquote>';
+      $html[] .='         </div>';
+      //end foreach
       $html[] .='       </div>';
       $html[] .='     </div>';
       $html[] .='   </div>';

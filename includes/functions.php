@@ -7,6 +7,12 @@ function myStyle() {
     wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), null, true);
 }
 
+function load_plugin_css() {
+    $plugin_url = plugin_dir_url( __FILE__ );
+    wp_enqueue_style( 'style1', $plugin_url . 'css/testimonial-plugin-style.css' );
+}
+add_action( 'wp_enqueue_scripts', 'load_plugin_css' );
+
 //hook 'admin_menu'
 add_action('admin_menu', 'testimonial_add_admin_link');
 
