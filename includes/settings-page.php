@@ -1,10 +1,12 @@
+<?php fetchTestimonial(); ?>
+<?php get_enum_values_status(); ?>
+
 <div class="col-md-12">
   <div class="row">
     <h1 style="text-align:center" clas>Slider Plugin</h1>
     <p style="text-align:center">Below you'll find all informations related to this pluging</p>
   </div>
 </div>
-<?php fetchTestimonial(); ?>
 
 <div class="col-md-12">
   <div class="row">
@@ -24,7 +26,11 @@
         <tr>
           <td><?= $testimonial->user_name ?></td>
           <td><?= $testimonial->messsage ?></td>
-          <td><?= $testimonial->status ?></td>
+          <td>
+            <?php foreach($enumsValues as $enumsValue): ?>
+              <option value="<?= $enumsValue ?>"><?= $enumsValue ?></option>
+            <?php endforeach; ?>
+          </td>
           <td><?= $testimonial->created_at ?></td>
         </tr>
       <?php endforeach; ?>
