@@ -39,6 +39,3 @@ function remove_database() {
     $sql = "DROP TABLE IF EXISTS $testimonial_table_name;";
     $wpdb->query($sql);
 }
-
-//created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-//                        updated_at TIMESTAMP DEFAULT NULL,
