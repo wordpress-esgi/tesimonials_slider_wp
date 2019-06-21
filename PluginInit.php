@@ -21,12 +21,16 @@ class PluginInit
       //foreach post
       $html[] .='         <div class="item active">';
       $html[] .='           <blockquote>';
-      $html[] .='             <p>Test</p>';
+      $html[] .='             <div class="col-sm-8 col-sm-offset-2">';
+      $html[] .='               <p>Test</p>';
+      $html[] .='             </div>';
       $html[] .='           </blockquote>';
       $html[] .='         </div>';
       $html[] .='         <div class="item active">';
       $html[] .='           <blockquote>';
-      $html[] .='             <p>Test</p>';
+      $html[] .='             <div class="col-sm-8 col-sm-offset-2">';
+      $html[] .='               <p>Test</p>';
+      $html[] .='             </div>';
       $html[] .='           </blockquote>';
       $html[] .='         </div>';
       //end foreach
@@ -35,6 +39,9 @@ class PluginInit
       $html[] .='   </div>';
       $html[] .=' </div>';
       $html[] .='</div>';
+      $html[] .='<a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>';
+      $html[] .='<a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>';
+
 
 
       echo implode('', $html);
