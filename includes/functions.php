@@ -29,10 +29,32 @@ function testimonial_add_admin_link(){
 
 function fetchTestimonial()
 {
-    global $wpdb;
+  global $wpdb;
   $testimonial_table_name = $wpdb->prefix . 'testimonial';
   $testimonials = $wpdb->get_results( "SELECT * FROM $testimonial_table_name");
   return $testimonials;
+}
+
+function fetchAuthorAndDescription()
+{
+  global $wpdb;
+  $testimonial_table_name = $wpdb->prefix . 'testimonial';
+  $testimonials = $wpdb->get_results( "SELECT user_name,message FROM $testimonial_table_name");
+  return $testimonials;
+}
+
+function get_enum_values_status()
+{
+  global $wpdb;
+  $testimonial_table_name = $wpdb->prefix . 'testimonial';
+  $results = $wpdb->get_results( "SHOW FIELDS FROM $testimonial_table_name LIKE 'status'" );
+  foreach ($results as $result) {
+    $array = get_object_vars($result);
+    $enums = $array['Type'];
+    preg_match('/enum\((.*)\)$/', $enums, $matches);
+    $enumsValues = explode(',', $matches[1]);
+  }
+  return $enumsValues;
 }
 
 function install(){
