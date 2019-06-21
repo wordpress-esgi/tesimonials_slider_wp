@@ -33,7 +33,7 @@ function fetchTestimonial()
   return $testimonials;
 }
 
-function fetchAuthorAndDescription()
+  function fetchAuthorAndDescription()
 {
   global $wpdb;
   $testimonial_table_name = $wpdb->prefix . 'testimonial';

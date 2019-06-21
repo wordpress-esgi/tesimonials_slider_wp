@@ -3,8 +3,12 @@
 
 <div class="col-md-12">
   <div class="row">
-    <h1 style="text-align:center" clas>Slider Plugin</h1>
-    <p style="text-align:center">Below you'll find all informations related to this pluging</p>
+    <h1 style="text-align:center;">Slider Plugin</h1>
+    <p style="text-align:center; margin-bottom:10rem;">Below you'll find all informations related to this pluging</p>
+
+    <div class="alert alert-primary" role="alert">
+      Here are the data related to the slider
+    </div>
   </div>
 </div>
 
