@@ -12,3 +12,10 @@ function testimonial_add_admin_link(){
     'testimonials_slider_wp/includes/settings-page.php'
   );
 }
+
+
+function fetchTestimonial()
+{
+  $testimonials = $wpdb->get_results( "SELECT * FROM Testimonial");
+  return $testimonials;
+}
