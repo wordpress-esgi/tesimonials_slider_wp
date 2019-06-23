@@ -27,6 +27,14 @@ function testimonial_add_admin_link(){
   );
 }
 
+add_action('admin_head',  'add_bootstrap_admin_head');
+
+function add_bootstrap_admin_head() {
+  wp_enqueue_style('AdminBootstrap', "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
+  wp_enqueue_script('AdminJquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), null, true);
+  wp_enqueue_style( 'AdminFA', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
+}
+
 function fetchTestimonial()
 {
   global $wpdb;
@@ -35,13 +43,14 @@ function fetchTestimonial()
   return $testimonials;
 }
 
-  function fetchAuthorAndDescription()
+function fetchAuthorAndDescription()
 {
   global $wpdb;
   $testimonial_table_name = $wpdb->prefix . 'testimonial';
   $testimonials = $wpdb->get_results( "SELECT user_name,message FROM $testimonial_table_name");
   return $testimonials;
 }
+
 
 function get_enum_values_status()
 {
@@ -53,8 +62,39 @@ function get_enum_values_status()
     $enums = $array['Type'];
     preg_match('/enum\((.*)\)$/', $enums, $matches);
     $enumsValues = explode(',', $matches[1]);
+    $enumsValues = str_replace('\'', "", $enumsValues);
   }
   return $enumsValues;
+}
+
+function postedValuesFormSlider()
+{
+  $postedValues = [];
+
+  if(isset($_POST['update'])){
+    for ($i=0; $i < count($_POST); $i++) {
+      if(!empty($_POST['id'][$i]) && !empty($_POST['id'][$i])) {
+      $postedValues['testimonial'.$i]['id'] = $_POST['id'][$i];
+      $postedValues['testimonial'.$i]['status'] = $_POST['status'][$i];
+      }
+    }
+  }
+  return $postedValues;
+}
+
+function updateValues()
+{
+  global $wpdb;
+  $testimonial_table_name = $wpdb->prefix . 'testimonial';
+  $postedValues = postedValuesFormSlider();
+
+  foreach ($postedValues as $aTestimonial => $aTestimonialValues) {
+    $updateQuery = "UPDATE {$testimonial_table_name}
+                    SET status = '{$aTestimonialValues['status']}'
+                    WHERE id = {$aTestimonialValues['id']}";
+    $wpdb->query($updateQuery);
+  }
+
 }
 
 function install(){
