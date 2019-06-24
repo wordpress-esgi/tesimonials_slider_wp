@@ -1,6 +1,8 @@
+<?php updateValues(); ?>
 <?php $testimonials = fetchTestimonial(); ?>
 <?php $enumsValues = get_enum_values_status(); ?>
-<?php updateValues(); ?>
+
+
 
 <div class="col-md-12 mb-5">
   <div class="row">
@@ -34,14 +36,24 @@
 
         <tbody>
         <?php foreach($testimonials as $testimonial): ?>
+          <?php var_dump($testimonial->status); ?>
           <tr>
             <td><?= $testimonial->user_name ?></td>
             <td><?= $testimonial->message ?></td>
             <td>
               <input type="hidden" name="id[]" value="<?= $testimonial->id; ?>" />
               <select name="status[]">
+
                 <?php foreach($enumsValues as $enumsValue): ?>
-                  <option value="<?= $enumsValue ?>"><?= $enumsValue ?></option>
+
+                  <?php if ($testimonial->status == $enumsValue): ?>
+                    <option value="<?= $enumsValue ?>" selected><?= $enumsValue ?></option>
+                  <?php endif; ?>
+
+                  <?php if ($testimonial->status != $enumsValue): ?>
+                    <option value="<?= $enumsValue ?>"><?= $enumsValue ?></option>
+                  <?php endif; ?>
+
                 <?php endforeach; ?>
               </select>
             </td>
