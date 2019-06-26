@@ -23,7 +23,7 @@
     </div>
 
     <form class="col-md-12" action="<?php wp_redirect( "settings-page.php" ); ?>" method="post">
-      <table class="table mb-5">
+      <table class="table mb-5 text-center">
 
         <thead>
           <tr>
@@ -36,18 +36,18 @@
 
         <tbody>
         <?php foreach($testimonials as $testimonial): ?>
-          <?php var_dump($testimonial->status); ?>
+
           <tr>
             <td><?= $testimonial->user_name ?></td>
             <td><?= $testimonial->message ?></td>
             <td>
               <input type="hidden" name="id[]" value="<?= $testimonial->id; ?>" />
-              <select name="status[]">
+              <select name="status[]" id="status">
 
                 <?php foreach($enumsValues as $enumsValue): ?>
 
                   <?php if ($testimonial->status == $enumsValue): ?>
-                    <option value="<?= $enumsValue ?>" selected><?= $enumsValue ?></option>
+                    <option id="selectedOption" value="<?= $enumsValue ?>" selected><?= $enumsValue ?></option>
                   <?php endif; ?>
 
                   <?php if ($testimonial->status != $enumsValue): ?>
@@ -70,7 +70,7 @@
       </div>
 
         <div class="col-md-12 form-group">
-          <label for="scrollingTimer">Scrolling Time </label>
+          <label for="scrollingTimer"><strong>Scrolling Time </strong></label>
           <select class="form-control" name="scrollingTimer" id="scrollingTimer">
             <option value="1" selected>1</option>
             <option value="2">2</option>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="col-md-12 form-group">
-          <label for="numberOfPicture">Picture's number</label>
+          <label for="numberOfPicture"><strong>Picture's number</strong></label>
           <select class="form-control" name="numberOfPicture" id="numberOfPicture">
             <option value="2" selected>2</option>
             <option value="3">3</option>

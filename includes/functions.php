@@ -32,6 +32,7 @@ add_action('admin_head',  'add_bootstrap_admin_head');
 function add_bootstrap_admin_head() {
   wp_enqueue_style('AdminBootstrap', "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
   wp_enqueue_script('AdminJquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), null, true);
+  wp_enqueue_script('jsCustom', plugin_dir_url( __FILE__ ).'script.js', array(), null, true);
   wp_enqueue_style( 'AdminFA', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
 }
 
