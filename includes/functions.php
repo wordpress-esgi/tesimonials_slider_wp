@@ -1,4 +1,5 @@
 <?php
+require_once plugin_dir_path(__FILE__).'../TestimonialForm.php';
 
 add_action( 'wp_enqueue_scripts', 'Bootstrap_style' );
 function Bootstrap_style() {
@@ -208,7 +209,10 @@ class TestimonialsWidget extends WP_Widget
     $html .='   </div>';
     $html .=' </div>';
     $html .='</div>';
+    $form = new TestimonialForm();
+    $html .= $form->create_form();
     echo $html;
+
 
 
 		echo $args['after_widget'];
