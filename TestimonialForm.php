@@ -14,12 +14,12 @@ class TestimonialForm {
             <label for="user_name">Nom</label>
             <input type="text" class="form-control" id="user_name" name="user_name" placeholder="">
           </div>
-          
+
           <div class="form-group">
             <label for="message">Message</label>
             <textarea class="form-control" id="message" name="message" rows="3"></textarea>
           </div>
-          
+
           <input id="submit" type="submit" name="testimonial_form_submit" class="btn btn-primary" value="Envoyer" />
         </form>
 EOF;
@@ -28,20 +28,20 @@ EOF;
             switch ($_GET['return']) {
                 case 'erreur' :
                     $errorMsg= "erreur";
-                    $formStr .= "<div class=\"alert\"> $errorMsg </div>";
+                    $formStr .= "<div class=\"alert alert-danger\"> $errorMsg </div>";
                     break;
 
                 case 'success' :
                     $errorMsg= "Avis envoyé!";
-                    $formStr .= "<div class=\"alert\"> $errorMsg </div>";
-				break;
+                    $formStr .= "<div class=\"alert alert-success\"> $errorMsg </div>";
+				            break;
 
-			default :
-                $errorMsg= 'Une erreur est survenue.';
-                $formStr .= "<div class=\"alert\"> $errorMsg </div>";
+			          default :
+                  $errorMsg= 'Une erreur est survenue.';
+                  $formStr .= "<div class=\"alert alert-danger\"> $errorMsg </div>";
 
-		    }
-        }
+		              }
+                }
         return $formStr;
     }
 }
