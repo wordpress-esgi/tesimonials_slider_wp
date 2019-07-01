@@ -19,7 +19,7 @@
   <div class="row">
 
     <div class="w-100 alert alert-primary text-center mb-4" role="alert">
-      Below are data about Slider
+      <h4 class="alert-heading">Below are data about Slider</h4>
     </div>
 
     <form class="col-md-12" action="<?php wp_redirect( "settings-page.php" ); ?>" method="post">
@@ -62,38 +62,85 @@
         <?php endforeach; ?>
         </tbody>
       </table>
-    </div>
 
-    <div class="row mt-5">
-      <div class="w-100 alert alert-primary text-center mb-4" role="alert">
-        Fill the form to configure slider's settings
+      <div class="col-md-12 text-center mb-4">
+        <button type="submit" name="update" class="btn btn-primary ">Submit</button>
       </div>
 
-        <div class="col-md-12 form-group">
-          <label for="scrollingTimer"><strong>Scrolling Time </strong></label>
-          <select class="form-control" name="scrollingTimer" id="scrollingTimer">
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
-
-        <div class="col-md-12 form-group">
-          <label for="numberOfPicture"><strong>Picture's number</strong></label>
-          <select class="form-control" name="numberOfPicture" id="numberOfPicture">
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
-
-        <div class="col-md-12 text-center">
-          <button type="submit" name="update" class="btn btn-primary ">Submit</button>
-        </div>
-
     </form>
+
+    <!-- <div class="w-100 alert alert-warning mb-4 mt-4" role="alert">
+      <h4 class="alert-heading mb-4">You will find below how to configure slider's configurations</h4>
+      <p>By editing shortcode, you can set your own configurations  :</p>
+      <p class="mb-0"><strong>Example :</strong> [testimonial_plugin numberslide="3" speed="1000"]</p>
+    </div> -->
+
+    <div class="w-100 alert alert-primary text-center mb-5" role="alert">
+      <h4 class="alert-heading">How to use shortcode to set slider's configuration ?</h4>
+    </div>
+
+    <div class="w-100 mb-5">
+      <h5 class="mt-5 mb-5 text-center">Basic shortcode :</h5>
+      <p class="font-italic">Title is how to call <strong>shortcode</strong> :</p>
+      <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin]</p>
+    </div>
+
+<!-- [testimonial_plugin speed="2000" numberslide="3" prev="angle-left" next="angle-right" title="Title"]  -->
+    <div class="w-100">
+      <h5 class="mt-5 mb-5 text-center">You can customize the slider with parameters in shortcode :</h5>
+
+      <div class="aCustomization w-100 mb-5">
+        <p class="font-italic">Title is defined on <strong>"Slider's title"</strong> :</p>
+        <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin title="Title"]</p>
+      </div>
+
+      <div class="aCustomization w-100 mb-5">
+        <p class="font-italic">Scrolling speed defined on <strong>2000ms</strong> :</p>
+        <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin speed="2000"]</p>
+      </div>
+
+      <div class="aCustomization w-100 mb-5">
+        <p class="font-italic">Image number defined on <strong>3</strong> : </p>
+        <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin numberslide="3"]</p>
+      </div>
+
+      <div class="aCustomization w-100 mb-5">
+        <p class="font-italic">Scrolling left icon is define on <strong>"angle-left"</strong> font awesome's class :</p>
+        <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin prev="angle-left"]</p>
+      </div>
+
+      <div class="aCustomization w-100 mb-5">
+        <p class="font-italic">Scrolling right icon is define on <strong>"angle-right"</strong> font awesome's class :</p>
+        <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin next="angle-right"]</p>
+      </div>
+    </div>
+
+    <div class="w-100 mb-5">
+      <h5 class="mt-5 mb-5 text-center">You can add multiple parameters in shortcode :</h5>
+
+      <div class="aCustomization w-100 mb-5">
+        <p class="font-italic">Example with <strong>speed & title :</strong></p>
+        <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin speed="2000" title="Title"]</p>
+      </div>
+
+      <div class="aCustomization w-100 mb-5">
+        <p class="font-italic">Example with <strong>slide's number & left/rigth scrolling icons :</strong></p>
+        <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin numberslide="3" prev="angle-left" next="angle-right"]</p>
+      </div>
+
+      <div class="aCustomization w-100 mb-5">
+        <p class="font-italic">Example with <strong>all parameters</strong></p>
+        <p class="w-75 alert alert-warning text-center mb-4">[testimonial_plugin speed="2000" numberslide="3" prev="angle-left" next="angle-right" title="Title"]</p>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
   </div>
 </div>
