@@ -8,6 +8,9 @@
   align-items: center;
 }
 
+.title-testimonial{
+  text-align: center;
+}
 .carousel-testimonial-plugin{
   min-height: 250px;
   display: flex;
