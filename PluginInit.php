@@ -8,7 +8,7 @@ class PluginInit
           $a = shortcode_atts(
               array(
                   'numberposts' => '4',
-                  'parametre2' => 'test parametre non renseigné',
+                  'parametre2' => '4000',
                   'parametre3'=> null
               ), $atts);
           //transforme les paramètres en variables
@@ -18,38 +18,42 @@ class PluginInit
 
 
     function create_slider($atts){
-          $numberPosts = $atts['numberposts'];
-          $param2= $atts['parametre2'];
-          $param3= $atts['parametre3'];
+
+
+      $testimonials = fetchTestimonialApproved();
+
+      $numberPosts = $atts['numberposts'];
+      $param2= $atts['parametre2'];
+      $param3= $atts['parametre3'];
       $html = '';
       $html .='<div class="container">';
       $html .=' <div class="row">';
       $html .='   <div class="col-md-12">';
-      $html .='     <div class="carousel slide" data-ride="carousel" id="quote-carousel">';
-      $html .='       <div class="carousel-inner text-center">';
-      //foreach post
-      $html .='         <div class="item active">';
-      $html .='           <blockquote>';
-      $html .='             <div class="col-sm-8 col-sm-offset-2">';
-      $html .='               <p>'. $param2 .'</p>';
-      $html .='             </div>';
-      $html .='           </blockquote>';
-      $html .='         </div>';
-      $html .='         <div class="item active">';
-      $html .='           <blockquote>';
-      $html .='             <div class="col-sm-8 col-sm-offset-2">';
-      $html .='               <p>'.$numberPosts. '</p>';
-      $html .='             </div>';
-      $html .='           </blockquote>';
-      $html .='         </div>';
-      //end foreach
+      $html .='     <div id="carouselTestimonial" class="carousel slide" data-ride="carousel" data-interval="'.$param2.'">';
+      $html .='        <div class="carousel-inner text-center carousel-testimonial-plugin">';
+      $i = 0;
+      foreach($testimonials as $testimonial){
+          if ($i == 0) {
+            $html .='         <div class="carousel-item active slide-testimonial-plugin">';
+            $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
+            $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
+            $html .='         </div>';
+          } else {
+            $html .='         <div class="carousel-item slide-testimonial-plugin">';
+            $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
+            $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
+            $html .='         </div>';
+          }
+        $i++;
+      }
       $html .='       </div>';
       $html .='     </div>';
+
+      $html .='<a class="carousel-control-prev testimonial-control" href="#carouselTestimonial" role="button" data-slide="prev"><i class="fa fa-chevron-left"></i></a>';
+      $html .='<a class="carousel-control-next testimonial-control" href="#carouselTestimonial" role="button" data-slide="next"><i class="fa fa-chevron-right"></i></a>';
       $html .='   </div>';
       $html .=' </div>';
       $html .='</div>';
-      $html .='<a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>';
-      $html .='<a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>';
       return $html;
     }
 

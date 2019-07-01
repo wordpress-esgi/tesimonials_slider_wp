@@ -1,3 +1,15 @@
-.item{
+.testimonial-control{
+  text-decoration: none !important;
+}
 
+#carouselTestimonial{
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-testimonial-plugin{
+  min-height: 250px;
+  display: flex;
+  align-items: center;
 }

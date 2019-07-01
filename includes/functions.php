@@ -5,6 +5,7 @@ function Bootstrap_style() {
     wp_enqueue_style( 'myStyle', get_stylesheet_uri());
     wp_enqueue_style('Bootstrap', "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
     wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), null, true);
+    wp_enqueue_script('BootJs', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js');
     wp_enqueue_style( 'font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
 }
 
@@ -42,6 +43,14 @@ function fetchTestimonial()
   $testimonial_table_name = $wpdb->prefix . 'testimonial';
   $testimonials = $wpdb->get_results( "SELECT * FROM $testimonial_table_name");
   return $testimonials;
+}
+
+function fetchTestimonialApproved()
+{
+  global $wpdb;
+  $testimonial_table_name = $wpdb->prefix . 'testimonial';
+  $testimonialsApproved = $wpdb->get_results( "SELECT * FROM $testimonial_table_name WHERE status='APPROVED'");
+  return $testimonialsApproved;
 }
 
 function fetchAuthorAndDescription()
