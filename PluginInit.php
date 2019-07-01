@@ -11,7 +11,7 @@ class PluginInit
           $a = shortcode_atts(
               array(
                   'numberslide' => '2',
-                  'title' => 'Les derniers témoignages',
+                  'title' => 'Les Témoignages',
                   'speed' => '4000',
                   'prev'=> 'chevron-left',
                   'next'=> 'chevron-right'

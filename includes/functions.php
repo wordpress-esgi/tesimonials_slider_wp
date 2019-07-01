@@ -6,7 +6,7 @@ function Bootstrap_style() {
     wp_enqueue_style('Bootstrap', "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
     wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), null, true);
     wp_enqueue_script('BootJs', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js');
-    wp_enqueue_style( 'font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
+    wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css' );
 }
 
 function load_plugin_css() {
@@ -150,4 +150,117 @@ function remove_database() {
     $testimonial_table_name = $wpdb->prefix . 'testimonial';
     $sql = "DROP TABLE IF EXISTS $testimonial_table_name;";
     $wpdb->query($sql);
+}
+
+
+// Init Widget
+
+class TestimonialsWidget extends WP_Widget
+{
+
+  function __construct()
+  {
+    parent::__construct(
+      'slider-widget',
+      esc_html__('Témoignages', 'mtp_domain'),
+      array(
+        'description' => esc_html__('Un widget pour les témoignages', 'mtp_domain'),
+      )
+    );
+  }
+  /**
+	 * Affichage en front
+	 */
+	public function widget( $args, $instance ) {
+		echo $args['before_widget'];
+    $testimonials = fetchTestimonialApproved();
+
+    $html = '';
+    $html .='<div class="container">';
+    $html .=' <div class="row">';
+    $html .='   <div class="col-md-12">';
+    $html .='     <div>';
+    $html .='     <h2 class="title-testimonial">'.$instance['title'].'</h2>';
+    $html .='     </div>';
+    $html .='     <div id="carouselTestimonialWidget" class="carousel slide" data-ride="carousel" data-interval="'.$instance['speed'].'">';
+    $html .='        <div class="carousel-inner text-center carousel-testimonial-plugin">';
+    $i = 0;
+    foreach($testimonials as $testimonial){
+      if($i < $instance['numberslide']){
+        if ($i == 0) {
+          $html .='         <div class="carousel-item active slide-testimonial-plugin">';
+          $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
+          $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
+          $html .='         </div>';
+        } else {
+          $html .='         <div class="carousel-item slide-testimonial-plugin">';
+          $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
+          $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
+          $html .='         </div>';
+        }
+      }
+      $i++;
+    }
+    $html .='       </div>';
+    $html .='<a class="carousel-control-prev testimonial-control" href="#carouselTestimonialWidget" role="button" data-slide="prev"><i class="fas fa-'.$instance['prev'].'"></i></a>';
+    $html .='<a class="carousel-control-next testimonial-control" href="#carouselTestimonialWidget" role="button" data-slide="next"><i class="fas fa-'.$instance['next'].'"></i></a>';
+    $html .='     </div>';
+    $html .='   </div>';
+    $html .=' </div>';
+    $html .='</div>';
+    echo $html;
+
+
+		echo $args['after_widget'];
+	}
+
+	/**
+	 * Formulaire en back
+	 */
+	public function form( $instance ) {
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'Les Témoignages', 'mtp_domain' );
+		$speed = ! empty( $instance['speed'] ) ? $instance['speed'] : esc_html__( '4000', 'mtp_domain' );
+		$numberSlide = ! empty( $instance['numberslide'] ) ? $instance['numberslide'] : esc_html__( '4', 'mtp_domain' );
+		$prev = ! empty( $instance['prev'] ) ? $instance['prev'] : esc_html__( 'angle-left', 'mtp_domain' );
+		$next = ! empty( $instance['next'] ) ? $instance['next'] : esc_html__( 'angle-right', 'mtp_domain' );
+		echo '<p>
+			<label for="'.esc_attr($this->get_field_id('title')).'">'.esc_attr_e('Titre :','mtp_domain').'</label>
+			<input class="widefat" id="'.esc_attr($this->get_field_name('title')).'" name="'.esc_attr($this->get_field_name('title')).'" type="text" value="'.esc_attr($title).'">
+      </p>';
+    echo  '<p>
+    <label for="'.esc_attr($this->get_field_id('speed')).'">'.esc_attr_e('Vitesse (en millisecondes) :','mtp_domain').'</label>
+    <input class="widefat" id="'.esc_attr($this->get_field_name('speed')).'" name="'.esc_attr($this->get_field_name('speed')).'" type="text" value="'.esc_attr($speed).'">
+    </p>';
+    echo  '<p>
+    <label for="'.esc_attr($this->get_field_id('numberslide')).'">'.esc_attr_e('Nombre de slides :','mtp_domain').'</label>
+    <input class="widefat" id="'.esc_attr($this->get_field_name('numberslide')).'" name="'.esc_attr($this->get_field_name('numberslide')).'" type="text" value="'.esc_attr($numberSlide).'">
+    </p>';
+    echo  '<p>
+    <label for="'.esc_attr($this->get_field_id('prev')).'">'.esc_attr_e('Icône précédent :','mtp_domain').'</label>
+    <input class="widefat" id="'.esc_attr($this->get_field_name('prev')).'" name="'.esc_attr($this->get_field_name('prev')).'" type="text" value="'.esc_attr($prev).'"></p>';
+    echo  '<p>
+    <label for="'.esc_attr($this->get_field_id('next')).'">'.esc_attr_e('Icône suivant :','mtp_domain').'</label>
+    <input class="widefat" id="'.esc_attr($this->get_field_name('next')).'" name="'.esc_attr($this->get_field_name('next')).'" type="text" value="'.esc_attr($next).'">
+    </p>';
+	}
+
+	/**
+	 * Sauvegarde des valeurs rentrées dans le formulaire
+	 */
+	public function update( $new_instance, $old_instance ) {
+		$instance = array();
+		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';
+		$instance['speed'] = ( ! empty( $new_instance['speed'] ) ) ? sanitize_text_field( $new_instance['speed'] ) : '';
+		$instance['numberslide'] = ( ! empty( $new_instance['numberslide'] ) ) ? sanitize_text_field( $new_instance['numberslide'] ) : '';
+		$instance['prev'] = ( ! empty( $new_instance['prev'] ) ) ? sanitize_text_field( $new_instance['prev'] ) : '';
+		$instance['next'] = ( ! empty( $new_instance['next'] ) ) ? sanitize_text_field( $new_instance['next'] ) : '';
+
+		return $instance;
+	}
+
+}
+add_action('widgets_init', 'mtp_register_widgets');
+
+function mtp_register_widgets(){
+    register_widget('TestimonialsWidget');
 }

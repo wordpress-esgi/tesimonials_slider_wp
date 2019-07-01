@@ -2,7 +2,7 @@
   text-decoration: none !important;
 }
 
-#carouselTestimonial{
+#carouselTestimonial, #carouselTestimonialWidget{
   min-height: 300px;
   display: flex;
   align-items: center;
@@ -18,9 +18,16 @@
 }
 
 .testimonial-control:visited{
-  color: black;
+  color: black !important;
 }
 
 .testimonial-control:hover{
-  color: black;
+  color: black !important;
+}
+
+.widget a:visited{
+  color: black !important;
+}
+.widget a{
+  color: black !important;
 }
