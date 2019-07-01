@@ -80,14 +80,14 @@
     </div>
 
     <div class="w-100 mb-5">
-      <h5 class="mt-5 mb-5 text-center">Basic shortcode :</h5>
+      <h5 class="mt-5 mb-5 text-center text-uppercase text-secondary">Basic shortcode :</h5>
       <p class="font-italic">Title is how to call <strong>shortcode</strong> :</p>
       <p class="w-50 alert alert-warning text-center mb-4">[testimonial_plugin]</p>
     </div>
 
 <!-- [testimonial_plugin speed="2000" numberslide="3" prev="angle-left" next="angle-right" title="Title"]  -->
     <div class="w-100">
-      <h5 class="mt-5 mb-5 text-center">You can customize the slider with parameters in shortcode :</h5>
+      <h5 class="mt-5 mb-5 text-center text-uppercase text-secondary">Customize slider with a parameter in shortcode :</h5>
 
       <div class="aCustomization w-100 mb-5">
         <p class="font-italic">Title is defined on <strong>"Slider's title"</strong> :</p>
@@ -116,7 +116,7 @@
     </div>
 
     <div class="w-100 mb-5">
-      <h5 class="mt-5 mb-5 text-center">You can add multiple parameters in shortcode :</h5>
+      <h5 class="mt-5 mb-5 text-center text-uppercase text-secondary">Add multiple parameters in shortcode :</h5>
 
       <div class="aCustomization w-100 mb-5">
         <p class="font-italic">Example with <strong>speed & title :</strong></p>
