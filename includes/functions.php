@@ -107,6 +107,24 @@ function updateValues()
 
 }
 
+function addTestimonialFromForm(array $data){
+    global $wpdb;
+    $testimonial_table_name = $wpdb->prefix . 'testimonial';
+    $sql = "INSERT INTO ".$testimonial_table_name." (user_name, message) VALUES ('".$data['user_name']."', '".$data['message']."')";
+    $wpdb->query($sql);
+}
+
+function add_testimonial_treatment() {
+
+    if (isset($_POST) && !empty($_POST)) {
+        addTestimonialFromForm($_POST);
+        $url = add_query_arg('return', 'success', wp_get_referer());
+        wp_safe_redirect($url);
+        exit();
+    }
+}
+add_action('template_redirect', 'add_testimonial_treatment');
+
 function install(){
     global $wpdb;
     $charset_collate = $wpdb->get_charset_collate();

@@ -1,10 +1,13 @@
 <?php
+require_once 'TestimonialForm.php';
+
 class PluginInit
 {
     public function __construct()
     {
       add_shortcode('testimonial_plugin', 'testimonial_init');
       function testimonial_init($atts, $content= null) {
+          $testimonialForm = new TestimonialForm();
           $a = shortcode_atts(
               array(
                   'numberslide' => '2',
@@ -13,16 +16,15 @@ class PluginInit
                   'prev'=> 'chevron-left',
                   'next'=> 'chevron-right'
               ), $atts);
-          //transforme les paramètres en variables
-//          extract($atts);
-        return create_slider($a);
+
+          $formAndSliderHtml = create_slider($a);
+          $formAndSliderHtml .= $testimonialForm->create_form();
+        return $formAndSliderHtml;
       }
 
 
     function create_slider($atts){
-
-
-      $testimonials = fetchTestimonialApproved();
+          $testimonials = fetchTestimonialApproved();
 
       $numberSlide = $atts['numberslide'];
       $title = $atts['title'];
@@ -66,9 +68,6 @@ class PluginInit
       return $html;
     }
 
-    function create_form(){
-
-    }
   }
 
 }
