@@ -17,6 +17,18 @@
   align-items: center;
 }
 
+.carousel-control-next {
+    right: -10%;
+}
+
+.carousel-control-prev {
+    left: -10%;
+}
+
+.testimonial-control i{
+  color: black;
+}
+
 .testimonial-control:visited{
   color: black !important;
 }
