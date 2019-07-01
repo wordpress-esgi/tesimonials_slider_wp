@@ -13,3 +13,11 @@
   display: flex;
   align-items: center;
 }
+
+.testimonial-control:visited{
+  color: black;
+}
+
+.testimonial-control:hover{
+  color: black;
+}
