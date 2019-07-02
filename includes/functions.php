@@ -180,9 +180,9 @@ class TestimonialsWidget extends WP_Widget
     $html .='<div class="container">';
     $html .=' <div class="row">';
     $html .='   <div class="col-md-12">';
-    $html .='     <div>';
-    $html .='     <h2 class="title-testimonial">'.$instance['title'].'</h2>';
-    $html .='     </div>';
+    if ( ! empty( $instance['title'] ) ) {
+      $html .= $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+    }
     $html .='     <div id="carouselTestimonialWidget" class="carousel slide" data-ride="carousel" data-interval="'.$instance['speed'].'">';
     $html .='        <div class="carousel-inner text-center carousel-testimonial-plugin">';
     $i = 0;
