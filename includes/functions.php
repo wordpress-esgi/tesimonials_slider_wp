@@ -17,7 +17,7 @@ function load_plugin_css() {
 add_action( 'wp_enqueue_scripts', 'load_plugin_css' );
 
 
-//hook 'admin_menu'
+
 add_action('admin_menu', 'testimonial_add_admin_link');
 
 function testimonial_add_admin_link(){
@@ -169,9 +169,9 @@ class TestimonialsWidget extends WP_Widget
       )
     );
   }
-  /**
-	 * Affichage en front
-	 */
+
+	// Front display
+
 	public function widget( $args, $instance ) {
 		echo $args['before_widget'];
     $testimonials = fetchTestimonialApproved();
@@ -186,21 +186,27 @@ class TestimonialsWidget extends WP_Widget
     $html .='     <div id="carouselTestimonialWidget" class="carousel slide" data-ride="carousel" data-interval="'.$instance['speed'].'">';
     $html .='        <div class="carousel-inner text-center carousel-testimonial-plugin">';
     $i = 0;
-    foreach($testimonials as $testimonial){
-      if($i < $instance['numberslide']){
-        if ($i == 0) {
-          $html .='         <div class="carousel-item active slide-testimonial-plugin">';
-          $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
-          $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
-          $html .='         </div>';
-        } else {
-          $html .='         <div class="carousel-item slide-testimonial-plugin">';
-          $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
-          $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
-          $html .='         </div>';
+    if(!empty($testimonials)){
+      foreach($testimonials as $testimonial){
+        if($i < $instance['numberslide']){
+          if ($i == 0) {
+            $html .='         <div class="carousel-item active slide-testimonial-plugin">';
+            $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
+            $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
+            $html .='         </div>';
+          } else {
+            $html .='         <div class="carousel-item slide-testimonial-plugin">';
+            $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
+            $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
+            $html .='         </div>';
+          }
         }
+        $i++;
       }
-      $i++;
+    }else{
+      $html .='         <div class="carousel-item active slide-testimonial-plugin">';
+      $html .='               <p class="testimonial-message">Laissez le premier témoignage !</p>';
+      $html .='         </div>';
     }
     $html .='       </div>';
     $html .='<a class="carousel-control-prev testimonial-control" href="#carouselTestimonialWidget" role="button" data-slide="prev"><i class="fas fa-'.$instance['prev'].'"></i></a>';
@@ -209,18 +215,16 @@ class TestimonialsWidget extends WP_Widget
     $html .='   </div>';
     $html .=' </div>';
     $html .='</div>';
+
     $form = new TestimonialForm();
     $html .= $form->create_form();
+
     echo $html;
-
-
-
 		echo $args['after_widget'];
 	}
 
-	/**
-	 * Formulaire en back
-	 */
+  // Widget's form back
+
 	public function form( $instance ) {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'Les Témoignages', 'mtp_domain' );
 		$speed = ! empty( $instance['speed'] ) ? $instance['speed'] : esc_html__( '4000', 'mtp_domain' );
@@ -248,9 +252,7 @@ class TestimonialsWidget extends WP_Widget
     </p>';
 	}
 
-	/**
-	 * Sauvegarde des valeurs rentrées dans le formulaire
-	 */
+	// update data
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? sanitize_text_field( $new_instance['title'] ) : '';

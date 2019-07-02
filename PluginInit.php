@@ -42,21 +42,27 @@ class PluginInit
       $html .='     <div id="carouselTestimonial" class="carousel slide" data-ride="carousel" data-interval="'.$speed.'">';
       $html .='        <div class="carousel-inner text-center carousel-testimonial-plugin">';
       $i = 0;
-      foreach($testimonials as $testimonial){
-        if($i < $numberSlide){
-          if ($i == 0) {
-            $html .='         <div class="carousel-item active slide-testimonial-plugin">';
-            $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
-            $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
-            $html .='         </div>';
-          } else {
-            $html .='         <div class="carousel-item slide-testimonial-plugin">';
-            $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
-            $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
-            $html .='         </div>';
+      if(!empty($testimonials)){
+        foreach($testimonials as $testimonial){
+          if($i < $numberSlide){
+            if ($i == 0) {
+              $html .='         <div class="carousel-item active slide-testimonial-plugin">';
+              $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
+              $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
+              $html .='         </div>';
+            } else {
+              $html .='         <div class="carousel-item slide-testimonial-plugin">';
+              $html .='               <p class="testimonial-message">'.$testimonial->message.'</p>';
+              $html .='               <p class="testimonial-user"><small>'.$testimonial->user_name.'</small></p>';
+              $html .='         </div>';
+            }
           }
+          $i++;
         }
-        $i++;
+      }else{
+        $html .='         <div class="carousel-item active slide-testimonial-plugin">';
+        $html .='               <p class="testimonial-message">Laissez le premier témoignage !</p>';
+        $html .='         </div>';
       }
       $html .='       </div>';
       $html .='<a class="carousel-control-prev testimonial-control" href="#carouselTestimonial" role="button" data-slide="prev"><i class="fas fa-'.$prev.'"></i></a>';
